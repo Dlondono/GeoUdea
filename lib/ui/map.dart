@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'category.dart';
+import 'recomendation.dart';
+import 'calendar.dart';
 
 class Map extends StatefulWidget {
   String? category;
@@ -41,31 +44,25 @@ class MapState extends State<Map> {
     super.initState();
     permissions();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text("GeoUdea"),
-        actions: [
-          IconButton(onPressed: (){
+      body:
+        GoogleMap(
+              rotateGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              compassEnabled: false,
+              markers: markers,
+              mapType: MapType.hybrid,
+              initialCameraPosition: _udeaGeneral,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
 
-          }, icon: Icon(Icons.menu))
-        ],
-      ),
-      body: GoogleMap(
-        rotateGesturesEnabled: false,
-        tiltGesturesEnabled: false,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        compassEnabled: false,
-        markers: markers,
-        mapType: MapType.hybrid,
-        initialCameraPosition: _udeaGeneral,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
       /*floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
         label: Text('To the lake!'),
@@ -85,3 +82,5 @@ class MapState extends State<Map> {
     }
   }
 }
+
+
