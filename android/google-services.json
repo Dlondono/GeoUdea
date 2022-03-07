@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "89398673966",
+    "project_id": "geoudea-b2123",
+    "storage_bucket": "geoudea-b2123.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89398673966:android:7c2f8e8c70c14fb72615bf",
+        "android_client_info": {
+          "package_name": "co.edu.udea.geoudea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89398673966-f5uiq3lfnede5bdq5f49frjv66n5qtne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwr9Ul1rbybA48PyaDhkqWbetf9LKmwCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89398673966-f5uiq3lfnede5bdq5f49frjv66n5qtne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
