@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class MapSample extends StatefulWidget {
+class Map extends StatefulWidget {
+  String? category;
+  Map({this.category});
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<Map> createState() => MapState();
 }
 
-class MapSampleState extends State<MapSample> {
+class MapState extends State<Map> {
+  Set<Marker> markers={bloque19,marker};
   Completer<GoogleMapController> _controller = Completer();
   static const marker = Marker(
     markerId: MarkerId('_udeaMarker'),
@@ -31,7 +35,12 @@ class MapSampleState extends State<MapSample> {
       target: LatLng(6.2682559, -75.5686284),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    permissions();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +54,12 @@ class MapSampleState extends State<MapSample> {
         ],
       ),
       body: GoogleMap(
-        markers: {marker,bloque19},
+        rotateGesturesEnabled: false,
+        tiltGesturesEnabled: false,
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        compassEnabled: false,
+        markers: markers,
         mapType: MapType.hybrid,
         initialCameraPosition: _udeaGeneral,
         onMapCreated: (GoogleMapController controller) {
@@ -63,5 +77,11 @@ class MapSampleState extends State<MapSample> {
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+
+  void permissions() async{
+    if (await Permission.location.request().isGranted) {
+    // Either the permission was already granted before or the user just granted it.
+    }
   }
 }
