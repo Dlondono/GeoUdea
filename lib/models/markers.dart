@@ -2,6 +2,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Markers{
   Set<Marker> deporte={canchaFutbol,piscina,coliseo};
+  Set<Marker> comida={cafe_5,cafe_9,cafe_13,cafe_14,cafe_19,cafe_25,cafe_lolita,restaurante_gourmet,restaurante_ing,bebidas_juguitos,pizzeria_artes};
+  Set<Marker> bloques={bloque19,bloque1,bloque2,bloque3,bloque4,bloque5,bloque6,bloque7,bloque9,bloque10,bloque11,
+  bloque12,bloque13,bloque14,bloque16,bloque18,bloque19,bloque20,bloque21,bloque22,bloque23,bloque24,bloque25,biblioteca};
 
   static const marker = Marker(
     markerId: MarkerId('_udeaMarker'),

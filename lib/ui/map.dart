@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:google_directions_api/google_directions_api.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
@@ -20,19 +19,10 @@ class MapState extends State<Map> {
   Markers model=Markers();
   Set<Marker> markers=<Marker>{};
   Set<Marker> deporte={};
+  Set<Marker> bloques={};
+  Set<Marker> comida={};
   Completer<GoogleMapController> _controller = Completer();
-  static const marker = Marker(
-    markerId: MarkerId('_udeaMarker'),
-    infoWindow: InfoWindow(title: "Está aca"),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(6.2678311, -75.5688568),
-  );
-  static var bloque19 = Marker(
-    markerId: MarkerId('_19'),
-    infoWindow: InfoWindow(title: "19"),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-    position: LatLng(6.268201, -75.567318),
-  );
+
   static const CameraPosition _udeaGeneral = CameraPosition(
     target: LatLng(6.2678311, -75.5688568),
     zoom: 16.9746,
@@ -49,7 +39,6 @@ class MapState extends State<Map> {
     super.initState();
     permissions();
     getMarkers();
-    deporte=model.deporte;
   }
   @override
   Widget build(BuildContext context) {
@@ -62,13 +51,14 @@ class MapState extends State<Map> {
         ],
       ),
       body: GoogleMap(
+
         rotateGesturesEnabled: false,
         tiltGesturesEnabled: false,
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
         compassEnabled: false,
         polylines: _polylines,
-        markers: deporte,
+        markers: markers,
         mapType: MapType.hybrid,
         initialCameraPosition: _udeaGeneral,
         onMapCreated: (GoogleMapController controller) {
@@ -94,12 +84,17 @@ class MapState extends State<Map> {
     }
   }
 
-  void getMarkers() {
+  void getMarkers()async {
     switch (widget.category) {
 
       case "comida":
         setState(() {
-          //markers=comida;
+          markers=model.comida;
+        });
+        return;
+      case "bloques":
+        setState(() {
+          markers=model.bloques;
         });
         return;
       case "estudio":
@@ -109,7 +104,7 @@ class MapState extends State<Map> {
       return;
       case "deportes":
         setState(() {
-        markers=deporte;
+        markers=model.deporte;
       });
       return;
       case "computo":
