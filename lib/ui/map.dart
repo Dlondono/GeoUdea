@@ -39,19 +39,20 @@ class MapState extends State<Map> {
     super.initState();
     permissions();
     getMarkers();
+    markers.add(marker);
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+     /* appBar: AppBar(
         actions: [
           ElevatedButton(onPressed: (){
             getDirections();
-          }, child: Text("a"))
+          }, child: Text("Ruta"))
         ],
-      ),
+      ),*/
       body: GoogleMap(
-
+        mapToolbarEnabled: false,
         rotateGesturesEnabled: false,
         tiltGesturesEnabled: false,
         myLocationEnabled: true,
@@ -112,8 +113,20 @@ class MapState extends State<Map> {
         //markers=computo;
       });
       return;
+      default:{
+        setState(() {
+
+        });
+      }
+      return;
     }
   }
+  static const marker = Marker(
+    markerId: MarkerId('_udeaMarker'),
+    infoWindow: InfoWindow(title: "Está aca"),
+    icon: BitmapDescriptor.defaultMarker,
+    position: LatLng(6.2678311, -75.5688568),
+  );
   Set<Polyline> _polylines=Set<Polyline>();
   Future<void> getDirections()async {
 
