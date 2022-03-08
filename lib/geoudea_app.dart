@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geoudea/ui/home.dart';
 import 'package:geoudea/ui/login_page.dart';
 import 'package:geoudea/ui/map.dart';
+import 'package:geoudea/ui/register_page.dart';
 
 class GeoUdeaApp extends StatelessWidget {
   const GeoUdeaApp({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class GeoUdeaApp extends StatelessWidget {
       theme: ThemeData(
         canvasColor: Colors.white,
       ),
-      home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }
