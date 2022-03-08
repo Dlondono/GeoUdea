@@ -8,7 +8,6 @@ import '../bloc/login_bloc.dart';
 import '../models/result.dart';
 
 class LoginPage extends StatefulWidget{
-  static String id = "login_page";
 
   @override
   _LoginPageState createState() => _LoginPageState();

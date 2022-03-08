@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geoudea/ui/login_page.dart';
 import 'package:geoudea/ui/map.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../bloc/login_bloc.dart';
+import '../models/result.dart';
 import 'category.dart';
 import 'recomendation.dart';
 import 'calendar.dart';
@@ -17,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String title="GeoUdeA";
+  final LoginBloc bloc=LoginBloc();
   FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -66,8 +70,16 @@ class _HomeState extends State<Home> {
                 _onSelectItem(3);
               },
             ),
-
             const Divider(),
+            ListTile(
+              title: const Text("Salir"),
+              leading: const Icon(Icons.logout),
+              selectedColor: Colors.green,
+              selected: (4 == _selectDrawerItem),
+              onTap: () {
+                _onSelectItem(4);
+              },
+            ),
           ],
         ),
       ),
@@ -92,6 +104,9 @@ class _HomeState extends State<Home> {
       case 3:
         title="Horario";
         return Calendar();
+      case 4:
+        title="Horario";
+        signOut();
     }
   }
 
@@ -100,6 +115,16 @@ class _HomeState extends State<Home> {
       _selectDrawerItem = pos;
 
       Navigator.of(context).pop();
+    });
+  }
+  void signOut() {
+    bloc.googleSignOut().then((value) {
+      if(value.status==Status.success){
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+            ModalRoute.withName('/'));
+      }
     });
   }
 }

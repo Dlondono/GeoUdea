@@ -5,7 +5,6 @@ import '../bloc/login_bloc.dart';
 import '../models/result.dart';
 
 class RegisterPage extends StatefulWidget{
-  static String id = "login_page";
 
   @override
   RegistersPage createState() => RegistersPage();
@@ -29,6 +28,7 @@ class RegistersPage extends State<RegisterPage>{
         child: Column(
           children: <Widget>[
             TextField(
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(labelText: "Correo electronico"),
               onChanged: (value){
                 _email=value;
