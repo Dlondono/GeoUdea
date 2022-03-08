@@ -8,59 +8,64 @@ import 'recomendation.dart';
 import 'calendar.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
+  String? category;
+  Home({this.category});
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  String title="GeoUdeA";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("GeoUdea"),
+        title: const Text("GeoUdeA"),
       ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            UserAccountsDrawerHeader(accountName: Text("El pepe"),
-                accountEmail: Text("elpepe@udeaa.edu.co")),
+            const UserAccountsDrawerHeader(accountName: Text("Pepe"),
+                accountEmail: Text("pepe@udea.edu.co"),decoration:BoxDecoration(color: Colors.green) ),
             ListTile(
-              title: Text("Mapa"),
-              leading: Icon(Icons.map),
+              title: const Text("Mapa"),
+              leading: const Icon(Icons.map),
+              selectedColor: Colors.green,
               selected: (0 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(0);
               },
             ),
             ListTile(
-              title: Text("Categorias"),
-              leading: Icon(Icons.category),
+              title: const Text("Categorias"),
+              leading: const Icon(Icons.category),
+              selectedColor: Colors.green,
               selected: (1 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(1);
               },
             ),
             ListTile(
-              title: Text("Recomendaciones"),
-              leading: Icon(Icons.recommend),
+              title: const Text("Recomendaciones"),
+              leading: const Icon(Icons.recommend),
+              selectedColor: Colors.green,
               selected: (2 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(2);
               },
             ),
             ListTile(
-              title: Text("Calendario"),
-              leading: Icon(Icons.calendar_today),
+              title: const Text("Calendario"),
+              leading: const Icon(Icons.calendar_today),
+              selectedColor: Colors.green,
               selected: (3 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(3);
               },
             ),
 
-            Divider(),
+            const Divider(),
           ],
         ),
       ),
@@ -74,12 +79,16 @@ class _HomeState extends State<Home> {
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return Map();
+        title="Mapa";
+        return Map(category: widget.category,);
       case 1:
-        return Category();
+        title="Categorias";
+        return const Category();
       case 2:
+        title="Recomendaciones";
         return Recomendation();
       case 3:
+        title="Horario";
         return Calendar();
     }
   }
@@ -87,6 +96,7 @@ class _HomeState extends State<Home> {
   _onSelectItem(int pos) {
     setState(() {
       _selectDrawerItem = pos;
+
       Navigator.of(context).pop();
     });
   }

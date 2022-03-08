@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geoudea/ui/home.dart';
+import 'package:geoudea/ui/map.dart';
 
 
 class Category extends StatelessWidget {
@@ -8,12 +10,12 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          child: MyStatefulWidget(),
+          child: const MyStatefulWidget(),
         );
   }
 }
 
-enum SingingCharacter {comida, bebida, areaDeEstudio, zonaWifi, deportes, salaDeComputo}
+enum SingingCharacter {comida, areaDeEstudio, bloques, deportes, salaDeComputo}
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
@@ -31,23 +33,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Categorías" , style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,)),
-        ListTile(
-          title: const Text('Comida', style: TextStyle(fontSize: 17),),
-          leading: Radio<SingingCharacter>(
-            value: SingingCharacter.comida,
-            groupValue: _character,
-            onChanged: (SingingCharacter? value) {
-              setState(() {
-                _character = value;
-              });
-            },
-          ),
+        const Padding(
+          padding: EdgeInsets.only(left: 30.0,top: 32.0),
+          child: Text("Categorías" , style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,)),
         ),
         ListTile(
-          title: const Text('Bebida', style: TextStyle(fontSize: 17),),
+          title: const Text('Cafeteria', style: TextStyle(fontSize: 17),),
           leading: Radio<SingingCharacter>(
-            value: SingingCharacter.bebida,
+            value: SingingCharacter.comida,
             groupValue: _character,
             onChanged: (SingingCharacter? value) {
               setState(() {
@@ -69,9 +62,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
         ListTile(
-          title: const Text('Zona Wifi', style: TextStyle(fontSize: 17),),
+          title: const Text('Bloques', style: TextStyle(fontSize: 17),),
           leading: Radio<SingingCharacter>(
-            value: SingingCharacter.zonaWifi,
+            value: SingingCharacter.bloques,
             groupValue: _character,
             onChanged: (SingingCharacter? value) {
               setState(() {
@@ -97,24 +90,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           leading: Radio<SingingCharacter>(
             value: SingingCharacter.salaDeComputo,
             groupValue: _character,
-            onChanged: (SingingCharacter? value) {
+            onChanged: (value) {
               setState(() {
                 _character = value;
               });
             },
           ),
         ),
-        Container(
-          color: Colors.green,
-              width: 150,
-              height: 50,
-     child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
-          onPressed: () {
-          },
-          child: Text('Buscar', style: TextStyle(fontSize: 20),),
-        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 30.0,top: 16.0),
+          child: Container(
+            color: Colors.green,
+                width: 150,
+                height: 50,
+               child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
+                    onPressed: () {
+                 print(_character!.name);
+                      _selectedCategoryToMap();
+
+            },
+                child: const Text('Buscar', style: const TextStyle(fontSize: 20),),
+          ),
+          ),
         ),
       ],
+    );
+  }
+
+  void _selectedCategoryToMap() {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => Home(category: _character!.name,))
     );
   }
 }
