@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:google_directions_api/google_directions_api.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'category.dart';
-import 'recomendation.dart';
-import 'calendar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+
+import '../models/markers.dart';
 
 class Map extends StatefulWidget {
   String? category;
@@ -14,7 +17,9 @@ class Map extends StatefulWidget {
 }
 
 class MapState extends State<Map> {
-  Set<Marker> markers={bloque19,marker};
+  Markers model=Markers();
+  Set<Marker> markers=<Marker>{};
+  Set<Marker> deporte={};
   Completer<GoogleMapController> _controller = Completer();
   static const marker = Marker(
     markerId: MarkerId('_udeaMarker'),
@@ -43,26 +48,33 @@ class MapState extends State<Map> {
     // TODO: implement initState
     super.initState();
     permissions();
+    getMarkers();
+    deporte=model.deporte;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-        GoogleMap(
-              rotateGesturesEnabled: false,
-              tiltGesturesEnabled: false,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              compassEnabled: false,
-              markers: markers,
-              mapType: MapType.hybrid,
-              initialCameraPosition: _udeaGeneral,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-            ),
-
+      appBar: AppBar(
+        actions: [
+          ElevatedButton(onPressed: (){
+            getDirections();
+          }, child: Text("a"))
+        ],
+      ),
+      body: GoogleMap(
+        rotateGesturesEnabled: false,
+        tiltGesturesEnabled: false,
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        compassEnabled: false,
+        polylines: _polylines,
+        markers: deporte,
+        mapType: MapType.hybrid,
+        initialCameraPosition: _udeaGeneral,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
       /*floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
         label: Text('To the lake!'),
@@ -81,6 +93,68 @@ class MapState extends State<Map> {
     // Either the permission was already granted before or the user just granted it.
     }
   }
+
+  void getMarkers() {
+    switch (widget.category) {
+
+      case "comida":
+        setState(() {
+          //markers=comida;
+        });
+        return;
+      case "estudio":
+        setState(() {
+        //markers=estudio;
+      });
+      return;
+      case "deportes":
+        setState(() {
+        markers=deporte;
+      });
+      return;
+      case "computo":
+        setState(() {
+        //markers=computo;
+      });
+      return;
+    }
+  }
+  Set<Polyline> _polylines=Set<Polyline>();
+  Future<void> getDirections()async {
+
+    final String url =
+        'https://maps.googleapis.com/maps/api/directions/json?origin=6.2678311,-75.5688568&destination=6.268201,-75.56731&mode=walking8&key=AIzaSyDYLgFxzXahao8xixKWkFcvnO4N8cxcrus';
+    var response= await http.get(Uri.parse(url));
+    var json=convert.jsonDecode(response.body);
+    var result={
+      'bounds_ne':json['routes'][0]['bounds']['northeast'],
+      'bounds_sw':json['routes'][0]['bounds']['southwest'],
+      'start_location':json['routes'][0]['legs'][0]['start_location'],
+      'end_location':json['routes'][0]['legs'][0]['end_location'],
+      'polyline':json['routes'][0]['overview_polyline']['points'],
+      'polyline_decoded': PolylinePoints().decodePolyline(json['routes'][0]['overview_polyline']['points']),
+    };
+    //print(result);
+    _setPolyline(result['polyline_decoded']);
+
+  }
+  int polylineIdCounter=1;
+  void _setPolyline(List<PointLatLng> points){
+    setState(() {
+
+      print(points);
+      final String polylineIdVal='polylineId_$polylineIdCounter';
+      polylineIdCounter++;
+      _polylines.add(Polyline(
+          polylineId: PolylineId(
+              polylineIdVal),
+          width: 3,
+          color: Colors.blue,
+          points: points.map((point)=> LatLng(point.latitude, point.longitude),
+          ).toList()
+      )
+      );
+    });
+
+  }
 }
-
-
