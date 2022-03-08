@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geoudea/ui/home.dart';
+import 'package:geoudea/ui/login_page.dart';
 import 'package:geoudea/ui/map.dart';
 
 class GeoUdeaApp extends StatelessWidget {
@@ -7,7 +8,10 @@ class GeoUdeaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      theme: ThemeData(
+        canvasColor: Colors.white,
+      ),
+      home: LoginPage(),
     );
   }
 }
