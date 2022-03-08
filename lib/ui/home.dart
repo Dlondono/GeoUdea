@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geoudea/ui/map.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String title="GeoUdeA";
+  FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +28,8 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const UserAccountsDrawerHeader(accountName: Text("Pepe"),
-                accountEmail: Text("pepe@udea.edu.co"),decoration:BoxDecoration(color: Colors.green) ),
+             UserAccountsDrawerHeader(accountName: Text(""),
+                accountEmail: Text(auth.currentUser!.email!),decoration:BoxDecoration(color: Colors.green) ),
             ListTile(
               title: const Text("Mapa"),
               leading: const Icon(Icons.map),

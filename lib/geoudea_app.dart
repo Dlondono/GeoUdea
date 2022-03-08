@@ -12,7 +12,7 @@ class GeoUdeaApp extends StatelessWidget {
       theme: ThemeData(
         canvasColor: Colors.white,
       ),
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }

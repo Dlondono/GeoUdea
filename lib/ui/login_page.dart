@@ -1,6 +1,11 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:geoudea/ui/home.dart';
+import 'package:geoudea/ui/register_page.dart';
+
+import '../bloc/login_bloc.dart';
+import '../models/result.dart';
 
 class LoginPage extends StatefulWidget{
   static String id = "login_page";
@@ -10,6 +15,9 @@ class LoginPage extends StatefulWidget{
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final LoginBloc bloc=LoginBloc();
+  String _email="";
+  String _password="";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: "Correo electronico",
                 ),
                 onChanged: (value){
-
+                  _email=value;
                 },
               ),
             );
@@ -73,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
+              obscureText: true,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 icon: Icon(Icons.lock),
@@ -80,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 labelText: "Contraseña",
               ),
               onChanged: (value){
-
+                _password=value;
               },
 
             ),
@@ -109,12 +118,30 @@ class _LoginPageState extends State<LoginPage> {
               ),
               elevation: 10,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+                signIn(_email,_password);
+              }
           );
           
         }
     );
 
+  }
+  void signIn(String email,String password){
+    bloc.signIn(email, password).then((value) {
+      if(value.status==Status.success){
+        goToHomePage();
+      }else{
+        print("error");
+      }
+    });
+  }
+  void goToHomePage() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => Home()),
+      ModalRoute.withName('/'),
+    );
   }
 
   _register() {
@@ -135,7 +162,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               elevation: 10,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => RegisterPage()),
+                );
+              }
           );
 
         }
