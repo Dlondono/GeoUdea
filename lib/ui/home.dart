@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
               },
             ),
             ListTile(
-              title: const Text("Calendario"),
+              title: const Text("Horario"),
               leading: const Icon(Icons.calendar_today),
               selectedColor: Colors.green,
               selected: (3 == _selectDrawerItem),

@@ -44,11 +44,17 @@ class MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     /* appBar: AppBar(
+    /* appBar: AppBar(
+       backgroundColor: Colors.green,
         actions: [
-          ElevatedButton(onPressed: (){
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+            ),
+              onPressed: (){
             getDirections();
-          }, child: Text("Ruta"))
+          }, child: Text("Ruta"),
+          )
         ],
       ),*/
       body: GoogleMap(
