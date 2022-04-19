@@ -196,7 +196,7 @@ class _AddAppointmentState extends State<AddAppointment> {
     AppointmentClass meeting=AppointmentClass(auth.currentUser!.uid, _name, desde.hour.toString(), hasta.hour.toString(),selectedDays);
     appointBloc.addMeeting(meeting);
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => Home(category: "Horario",)));
+        MaterialPageRoute(builder: (BuildContext context) => Home()));
   }
 
 

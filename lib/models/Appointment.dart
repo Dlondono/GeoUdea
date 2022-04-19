@@ -1,6 +1,4 @@
 
-import 'package:flutter/material.dart';
-
 class AppointmentClass {
   String? uid;
   String? name;
@@ -27,6 +25,23 @@ class AppointmentClass {
     data['endTime'] = endTime;
     data['selectedDays'] = selectedDays;
 
+    return data;
+  }
+}
+class Recomendaciones {
+  String? title;
+  String? description;
+
+  Recomendaciones(this.title, this.description);
+
+  Recomendaciones.fromJsonMap(Map<String, dynamic> map)
+      :title=map["title"],
+        description=map["description"];
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['title'] = title;
+    data['description'] = description;
     return data;
   }
 }

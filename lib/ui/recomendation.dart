@@ -1,88 +1,42 @@
 
 import 'package:flutter/material.dart';
+import 'package:geoudea/bloc/reco_bloc.dart';
+import 'package:geoudea/models/Appointment.dart';
 import 'package:geoudea/ui/agg_recomendation.dart';
 import 'package:geoudea/ui/home.dart';
 
-class Recomendation extends StatelessWidget{
+class Recomendation extends StatefulWidget{
+  @override
+  State<Recomendation> createState() => _RecomendationState();
+}
+
+class _RecomendationState extends State<Recomendation> {
+  RecoBloc bloc=RecoBloc();
+  List<Recomendaciones>? recomendaciones;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getRecomendaciones();
+  }
   @override
   Widget build(BuildContext context){
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-    Padding(
-    padding: EdgeInsets.only(left: 40.0,top: 32.0),
-    child: Text("Lista de Recomendaciones" , style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,)),
-    ),
-    Padding(
-    padding: EdgeInsets.only(left: 1.0,top: 22.0),
-    child: Container(
-    child: ListTile(
-    title: Text('when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries', style: TextStyle(fontSize: 13),),
-      leading: Icon(
-        Icons.recommend,
-        size: 35,
-        color: Colors.lightGreen,
-      ),
-
-    ),
-    ),
-    ),
-          Padding(
-            padding: EdgeInsets.only(left: 1.0,top: 12.0),
-            child: Container(
-              child: ListTile(
-                title: Text('when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries', style: TextStyle(fontSize: 13),),
-                leading: Icon(
-                  Icons.recommend,
-                  size: 35,
-                  color: Colors.lightGreen,
-                ),
-
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 1.0,top: 12.0),
-            child: Container(
-              child: ListTile(
-                title: Text('when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries', style: TextStyle(fontSize: 13),),
-                leading: Icon(
-                  Icons.recommend,
-                  size: 35,
-                  color: Colors.lightGreen,
-                ),
-
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 1.0,top: 12.0),
-            child: Container(
-              child: ListTile(
-                title: Text('when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries', style: TextStyle(fontSize: 13),),
-                leading: Icon(
-                  Icons.recommend,
-                  size: 35,
-                  color: Colors.lightGreen,
-                ),
-
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 1.0,top: 12.0),
-            child: Container(
-              child: ListTile(
-                title: Text('when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries', style: TextStyle(fontSize: 13),),
-                leading: Icon(
-                  Icons.recommend,
-                  size: 35,
-                  color: Colors.lightGreen,
-                ),
-
-              ),
-            ),
+          ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: recomendaciones!.length,
+              itemBuilder: (context, index){
+                return Column(
+                  children: [
+                    Text(recomendaciones![index].title!),
+                    Text(recomendaciones![index].description!),
+                  ],
+                );
+              }
           ),
           Padding(
             padding: const EdgeInsets.only(left: 90.0,top: 36.0),
@@ -104,5 +58,10 @@ class Recomendation extends StatelessWidget{
   ],
 
     );
+  }
+
+  void getRecomendaciones()async {
+
+    recomendaciones=await bloc.getRecomendaciones();
   }
 }

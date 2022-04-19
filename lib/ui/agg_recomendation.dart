@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geoudea/bloc/reco_bloc.dart';
 import 'package:geoudea/ui/recomendation.dart';
 
 class AggRecomendation extends StatefulWidget {
@@ -12,10 +13,14 @@ class _AggRecomendationState extends State<AggRecomendation> {
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _contenidoController = TextEditingController();
   final GlobalKey<FormState> _formularioKey = GlobalKey<FormState>();
+  RecoBloc recoBloc=RecoBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
+      body: SingleChildScrollView(
         child: Form(
           key: _formularioKey,
           child: Column(
@@ -41,7 +46,7 @@ class _AggRecomendationState extends State<AggRecomendation> {
               }
 
             ),
-      TextFormField(
+        TextFormField(
         controller: _contenidoController,
         maxLength: 200,
         maxLines: 5,
@@ -64,7 +69,8 @@ class _AggRecomendationState extends State<AggRecomendation> {
                 height: 50,
                 child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
                   onPressed: () {
-                      
+                    recoBloc.addReco(_tituloController.text, _contenidoController.text);
+                    Navigator.pop(context);
                   },
                   child: const Text('Agregar Recomendación', style: const TextStyle(fontSize: 15),),
                 ),
@@ -88,7 +94,7 @@ class _AggRecomendationState extends State<AggRecomendation> {
               ),
             ),
           ],
-      ),
+        ),
         ),
       ),
     );
