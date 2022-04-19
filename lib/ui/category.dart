@@ -15,7 +15,7 @@ class Category extends StatelessWidget {
   }
 }
 
-enum SingingCharacter {comida, areaDeEstudio, bloques, deportes, salaDeComputo}
+enum SingingCharacter {comida, sitios, bloques, deportes, salaDeComputo}
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
@@ -50,9 +50,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
         ListTile(
-          title: const Text('Área de estudio', style: TextStyle(fontSize: 17),),
+          title: const Text('Sitios de interés', style: TextStyle(fontSize: 17),),
           leading: Radio<SingingCharacter>(
-            value: SingingCharacter.areaDeEstudio,
+            value: SingingCharacter.sitios,
             groupValue: _character,
             onChanged: (SingingCharacter? value) {
               setState(() {
@@ -79,18 +79,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             value: SingingCharacter.deportes,
             groupValue: _character,
             onChanged: (SingingCharacter? value) {
-              setState(() {
-                _character = value;
-              });
-            },
-          ),
-        ),
-        ListTile(
-          title: const Text('Sala de computo', style: TextStyle(fontSize: 17),),
-          leading: Radio<SingingCharacter>(
-            value: SingingCharacter.salaDeComputo,
-            groupValue: _character,
-            onChanged: (value) {
               setState(() {
                 _character = value;
               });

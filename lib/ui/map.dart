@@ -21,6 +21,7 @@ class MapState extends State<Map> {
   Set<Marker> deporte={};
   Set<Marker> bloques={};
   Set<Marker> comida={};
+  Set<Marker> sitios={};
   Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition _udeaGeneral = CameraPosition(
@@ -114,6 +115,11 @@ class MapState extends State<Map> {
         markers=model.deporte;
       });
       return;
+      case "sitios":
+        setState(() {
+          markers=model.sitios;
+        });
+        return;
       case "computo":
         setState(() {
         //markers=computo;

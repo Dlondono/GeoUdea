@@ -1,7 +1,8 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Markers{
-  Set<Marker> deporte={canchaFutbol,piscina,coliseo};
+  Set<Marker> deporte={canchaFutbol,piscina,coliseo,placa};
+  Set<Marker> sitios={fuente,prometeo,chelista,parqueadero1,parqueadero2,museo,creador,reloj,teatro,cruzado,editorial};
   Set<Marker> comida={cafe_5,cafe_9,cafe_13,cafe_14,cafe_19,cafe_25,cafe_lolita,restaurante_gourmet,restaurante_ing,bebidas_juguitos,pizzeria_artes};
   Set<Marker> bloques={bloque19,bloque1,bloque2,bloque3,bloque4,bloque5,bloque6,bloque7,bloque9,bloque10,bloque11,
   bloque12,bloque13,bloque14,bloque16,bloque18,bloque19,bloque20,bloque21,bloque22,bloque23,bloque24,bloque25,biblioteca};
@@ -23,6 +24,78 @@ class Markers{
     infoWindow: InfoWindow(title: "Cancha de futbol"),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
     position: LatLng(6.26943,-75.56957),
+  );
+  static var prometeo = Marker(
+    markerId: MarkerId('Prometeo cristo cayendo'),
+    infoWindow: InfoWindow(title: "Prometo cristo cayendo"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26742,-75.56831),
+  );
+  static var placa = Marker(
+    markerId: MarkerId('Placa atlética'),
+    infoWindow: InfoWindow(title: "Placa atlética"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26967, -75.56873),
+  );
+  static var editorial = Marker(
+    markerId: MarkerId('Tienda universitaria'),
+    infoWindow: InfoWindow(title: "Tienda universitaria"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26908, -75.5671),
+  );
+  static var parqueadero1 = Marker(
+    markerId: MarkerId('Parqueadero'),
+    infoWindow: InfoWindow(title: "Parqueadero"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26687, -75.56782),
+  );
+  static var parqueadero2 = Marker(
+    markerId: MarkerId('Parqueadero'),
+    infoWindow: InfoWindow(title: "Parqueadero"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26748, -75.57047),
+  );
+  static var museo = Marker(
+    markerId: MarkerId('Museo universitario'),
+    infoWindow: InfoWindow(title: "Museo universitario"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26733, -75.56977),
+  );
+  static var creador = Marker(
+    markerId: MarkerId('Hombre creador de energía'),
+    infoWindow: InfoWindow(title: "Hombre creador de energía"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26729, -75.56938),
+  );
+  static var reloj = Marker(
+    markerId: MarkerId('Reloj solar'),
+    infoWindow: InfoWindow(title: "Reloj solar"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26715, -75.56738),
+  );
+  static var fuente = Marker(
+    markerId: MarkerId('Fuente'),
+    infoWindow: InfoWindow(title: "Fuente"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26761,-75.56886),
+  );
+  static var chelista = Marker(
+    markerId: MarkerId('Chelista'),
+    infoWindow: InfoWindow(title: "Chelista"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26784, -75.57033),
+  );
+  static var teatro = Marker(
+    markerId: MarkerId('Teatro al aire libre'),
+    infoWindow: InfoWindow(title: "Teatro al aire libre"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.26598, -75.56773),
+  );
+  static var cruzado = Marker(
+    markerId: MarkerId('Yo cruzado'),
+    infoWindow: InfoWindow(title: "Yo cruzado"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    position: LatLng(6.2663, -75.56844),
   );
   static var piscina = Marker(
     markerId: MarkerId('Piscina'),
