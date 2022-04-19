@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class AppointmentClass {
   String? uid;
   String? name;
-  TimeOfDay? startTime;
-  TimeOfDay? endTime;
+  String? startTime;
+  String? endTime;
   List? selectedDays = [];
 
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:geoudea/bloc/appoint_bloc.dart';
 import 'package:geoudea/models/Appointment.dart';
+import 'package:geoudea/ui/calendar.dart';
+import 'package:geoudea/ui/home.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/chip_display/multi_select_chip_display.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -191,8 +193,10 @@ class _AddAppointmentState extends State<AddAppointment> {
   }
 
   void saveAppointment() {
-    AppointmentClass meeting=AppointmentClass(auth.currentUser!.uid, _name, desde, hasta,selectedDays);
+    AppointmentClass meeting=AppointmentClass(auth.currentUser!.uid, _name, desde.hour.toString(), hasta.hour.toString(),selectedDays);
     appointBloc.addMeeting(meeting);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => Home(category: "Horario",)));
   }
 
 
@@ -201,6 +205,7 @@ class _AddAppointmentState extends State<AddAppointment> {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
       initialTime: _time,
+
     );
     if (newTime != null) {
       setState(() {

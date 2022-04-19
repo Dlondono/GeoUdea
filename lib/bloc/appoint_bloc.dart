@@ -9,27 +9,27 @@ class AppointBloc{
 
   Future<dynamic> getMeetingsByUid(String uid) async {
     return meetings.where('uid', isEqualTo: uid).get().then((value) {
-      var pets =
+      List<AppointmentClass> meetings =
       value.docs.map((e) => AppointmentClass.fromJsonMap(e.data() as Map<String,dynamic>)).toList();
-      if(pets.isNotEmpty){
-        return pets;
+      if(meetings.isNotEmpty){
+        return meetings;
       }else{
-        print("nada");
-        return null;
+        return "a";
       }
 
     }).catchError(
-            (error) =>  null);
+
+            (error) =>  print(error));
   }
   Future addMeeting(AppointmentClass meeting)async{
 
-    return await meetings.doc(meeting.uid).set({
+    return await meetings.doc().set({
       "name":meeting.name,
       "owner":auth.currentUser?.uid,
       "uid":meeting.uid,
-      "startTime": meeting.startTime!.hour.toString() + ":" + meeting.startTime!.minute.toString().padLeft(2, '0'),
-      "endTime": meeting.endTime!.hour.toString() + ":" + meeting.endTime!.minute.toString().padLeft(2, '0'),
-
+      "startTime": meeting.startTime!,
+      "endTime": meeting.endTime!,
+      "selectedDays":meeting.selectedDays
     }).then((value) {
       return meeting;
     });
