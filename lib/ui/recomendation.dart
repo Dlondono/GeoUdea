@@ -12,7 +12,7 @@ class Recomendation extends StatefulWidget{
 
 class _RecomendationState extends State<Recomendation> {
   RecoBloc bloc=RecoBloc();
-  List<Recomendaciones>? recomendaciones;
+  List<Recomendaciones> recomendaciones=[];
   @override
   void initState() {
     // TODO: implement initState
@@ -28,12 +28,12 @@ class _RecomendationState extends State<Recomendation> {
           ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: recomendaciones!.length,
+              itemCount: recomendaciones.length,
               itemBuilder: (context, index){
                 return Column(
                   children: [
-                    Text(recomendaciones![index].title!),
-                    Text(recomendaciones![index].description!),
+                    Text(recomendaciones[index].title!),
+                    Text(recomendaciones[index].description!),
                   ],
                 );
               }
@@ -62,6 +62,11 @@ class _RecomendationState extends State<Recomendation> {
 
   void getRecomendaciones()async {
 
-    recomendaciones=await bloc.getRecomendaciones();
+    List<Recomendaciones> recos;
+    recos=await bloc.getRecomendaciones();
+    setState(() {
+      recomendaciones=recos;
+    });
+
   }
 }
