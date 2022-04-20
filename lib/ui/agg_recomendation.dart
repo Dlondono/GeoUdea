@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geoudea/bloc/reco_bloc.dart';
+import 'package:geoudea/ui/home.dart';
 import 'package:geoudea/ui/recomendation.dart';
 
 class AggRecomendation extends StatefulWidget {
@@ -70,7 +71,10 @@ class _AggRecomendationState extends State<AggRecomendation> {
                 child:  ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
                   onPressed: () {
                     recoBloc.addReco(_tituloController.text, _contenidoController.text);
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) => Recomendation())
+                    );
                   },
                   child: const Text('Agregar Recomendación', style: const TextStyle(fontSize: 15),),
                 ),

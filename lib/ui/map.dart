@@ -80,7 +80,10 @@ class MapState extends State<Map> {
     );
      var editorial = Marker(
       markerId: const MarkerId('Tienda universitaria'),
-      infoWindow: const InfoWindow(title: "Tienda universitaria"),
+      infoWindow: InfoWindow(title: "Tienda universitaria", onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Information(title: "Tienda universitaria",description: "Lugar donde los estudiantes pueden comprar articulos referentes a la universidad de Antioquia",products: "Libros, camisas, afiches, busos",)));}),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(6.26908, -75.5671),
     );
@@ -98,7 +101,10 @@ class MapState extends State<Map> {
     );
      var museo = Marker(
       markerId: const MarkerId('Museo universitario'),
-      infoWindow: const InfoWindow(title: "Museo universitario"),
+      infoWindow: InfoWindow(title: "Museo universitario", onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Information(title: "Museo Universitario",description: "Espacio en el cual se encuentra diferentes historias y culturas de la humanidad",products: "Recuerdos, esculturas, llaveros",)));}),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(6.26733, -75.56977),
     );
@@ -128,7 +134,10 @@ class MapState extends State<Map> {
     );
      var teatro = Marker(
       markerId: const MarkerId('Teatro al aire libre'),
-      infoWindow: const InfoWindow(title: "Teatro al aire libre"),
+      infoWindow: InfoWindow(title: "Teatro al aire libre", onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Information(title: "Teatro al aire libre",description: "Sitio donde los estudiante realizan sus estudios y practican diversas actividades",products: "Ninguno",)));}),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(6.26598, -75.56773),
     );
@@ -296,7 +305,10 @@ class MapState extends State<Map> {
     );
      var cafe_19 = Marker(
       markerId: const MarkerId('cafe_19'),
-      infoWindow: const InfoWindow(title: "Domo cafe bloque 19"),
+      infoWindow: InfoWindow(title: "Domo cafe bloque 19", onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Information(title: "Domo cafe bloque 19",description: "Lugar donde los estudiantes se relajan y toman café",products: "Café, almuerzos",)));}),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(6.2682759552649205, -75.5674484225269),
     );
@@ -330,7 +342,10 @@ class MapState extends State<Map> {
     );
      var cafe_25 = Marker(
       markerId: const MarkerId('cafe_25'),
-      infoWindow: const InfoWindow(title: "Domo cafe bloque 25 Artes"),
+      infoWindow: InfoWindow(title: "Domo cafe bloque 25 Artes",onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Information(title: "Domo cafe bloque 25 Artes",description: "Lugar para todo tipo de estudiante",products: "bebidas, almuerzos, café",)));}),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(6.268222046579488, -75.56940609548589),
     );

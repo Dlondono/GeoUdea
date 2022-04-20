@@ -29,10 +29,12 @@ class _InformationState extends State<Information> {
               Padding(
                 padding: EdgeInsets.only(left: 40.0,top: 32.0),
               ),
+              ListTile(
+                title:
               Text(widget.title),
-              Text(widget.description),
-              Text(widget.products),
-
+              subtitle:
+              Text(widget.description + '\n' + widget.products),
+              ),
             ],
           ),
         ),
